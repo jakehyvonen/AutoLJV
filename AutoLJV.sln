@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLJV", "AutoLJV\AutoLJV.csproj", "{EBF633C4-1CE8-4B08-A93C-A7E8B3DDBCD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBF633C4-1CE8-4B08-A93C-A7E8B3DDBCD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF633C4-1CE8-4B08-A93C-A7E8B3DDBCD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF633C4-1CE8-4B08-A93C-A7E8B3DDBCD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF633C4-1CE8-4B08-A93C-A7E8B3DDBCD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {727E01E7-0879-48B5-9C00-CA0F5802318E}
+	EndGlobalSection
+EndGlobal

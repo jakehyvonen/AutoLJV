@@ -1,0 +1,114 @@
+﻿<Window x:Class="AutoLJV.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoLJV"
+        xmlns:instr="clr-namespace:AutoLJV.Instrument_Control"
+        xmlns:tree="clr-namespace:DeviceBatchGenerics.Support.ExtendedTreeView;assembly=DeviceBatchGenerics"
+        mc:Ignorable="d"
+        Title="AutoLJV" MinHeight="555" MinWidth="888">
+    <Window.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type tree:DirectoryItem}" ItemsSource="{Binding Items}">
+            <TextBlock Text="{Binding Path=Name}" ToolTip="{Binding Path=Path}"/>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+    <Grid x:Name="ThaGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Separator></Separator>
+            <Label HorizontalAlignment="Center">Raspberry Pi/CNC Commands</Label>
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="1">
+                    <StackPanel>
+                        <!--<TextBox MinWidth="111" Text="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator.TheRasPiController},Path=LJVScanCoordinator.GCodePiCommand,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>-->
+                        <TextBox Name="commandTxtBox" MinWidth="111" />
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" 
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.SendGCodePiCommand}" Background="LightSalmon" Click="piCommandButton_Click">Send GCode</Button>
+                    </StackPanel>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="0">
+                    <WrapPanel>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" Click="piInitializeButton_Click"
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.PiInitialize}" Background="LightGreen">Initialize</Button>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" Click="piIdleButton_Click"
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.PiIdleCommand}" Background="LightGreen">Return to Idle</Button>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" Click="piSwapButton_Click"
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.PiSwap}" Background="LightGreen">Swap Device</Button>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" Click="piPixelAButton_Click"
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.PiPixelA}" Background="LightSalmon">Pixel A</Button>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" Click="piPixelBButton_Click"
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.PiPixelB}" Background="LightSalmon">Pixel B</Button>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" Click="piPixelCButton_Click"
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.PiPixelC}" Background="LightSalmon">Pixel C</Button>
+                        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Width="111" Click="piPixelDButton_Click"
+                                Command="{Binding Source={x:Static instr:InstrumentService.LJVScanCoordinator},Path=TheRasPiController.PiPixelD}" Background="LightSalmon">Pixel D</Button>
+                    </WrapPanel>
+                </StackPanel>
+            </Grid>
+            <Separator></Separator>
+
+            <WrapPanel HorizontalAlignment="Center">
+                <Button 
+                VerticalAlignment="Center" HorizontalAlignment="Left" Width="Auto" 
+                Click="openBatchBuilderButton_Click" >Create New Batch</Button>
+                <Separator Visibility="Hidden" Width="111"></Separator>
+                <Button 
+                VerticalAlignment="Center" HorizontalAlignment="Left" Width="Auto" 
+                Click="openBatchScanButton_Click" >Scan Selected Batch</Button>
+                <Separator Visibility="Hidden" Width="111"></Separator>
+                <Button 
+                VerticalAlignment="Center" HorizontalAlignment="Left" Width="Auto" 
+                Click="openManualButton_Click" >Open Manual Scanning</Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <Expander Grid.Row="1" IsExpanded="True" Header="Select Device Batch">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <tree:ExtendedTreeView 
+                    SelectedItem_="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                    Grid.Column="0" ItemsSource="{Binding DevBatchPaths, UpdateSourceTrigger=PropertyChanged}">
+                </tree:ExtendedTreeView>
+                <GridSplitter 
+                    Background="Gray" Grid.Column="1" Width="2" 
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                </GridSplitter>
+                <DataGrid
+                    ItemsSource="{Binding DeviceBatchVMs, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedDeviceBatchVM, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                    Grid.Column="2"
+                    SelectionMode="Single"
+                    CanUserAddRows="False"
+                    ColumnWidth="Auto"
+                    ScrollViewer.CanContentScroll="True"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    AutoGenerateColumns="False"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding TheDeviceBatch.Name}" Header="Name"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding TheDeviceBatch.Employee.FirstName}"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding TheDeviceBatch.Employee.LastName}"></DataGridTextColumn>
+                    <DataGridTextColumn SortMemberPath="FabDate" SortDirection="Descending" Binding="{Binding TheDeviceBatch.FabDate, StringFormat=MM/dd/yy}" Header="Fab Date"></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding TheDeviceBatch.Notes}" Header="Description"></DataGridTextColumn>
+                </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Expander>
+    </Grid>
+</Window>
