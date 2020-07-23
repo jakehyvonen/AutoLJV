@@ -31,7 +31,7 @@ Output data includes:
 
 There are two measurements of LED light output: a fast measurement using a photodiode and the KE6485, then a slower (but precise) measurement with the PhotoResearch camera. To account for device instability, a photodiode reading is taken before and after the LED current measurement, before and after the camera measurement, and then interpolated. The camera luminance readings are calibrated against the photodiode readings
 
-Please note that this project is not intended for general usage, but for reference only. Here are links to the other necessary libraries:
+Please note that this project is not intended for general usage, but for reference only. It was developed for a rather specialized environment and a lot of stuff will break if used elsewhere. Here are links to the other necessary libraries:
 <ul>
 <li><a href="https://github.com/jakehyvonen/EFDeviceBatchCodeFirst">EFDeviceBatchCodeFirst</a></li>
 <li><a href="https://github.com/jakehyvonen/DeviceBatchGenerics">DeviceBatchGenerics</a></li>
