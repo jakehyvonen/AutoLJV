@@ -1,6 +1,13 @@
 # AutoLJV
 AutoLJV is a C#/.NET solution that controls instruments for voltage sweeps of LEDs. A WPF GUI allows users to interact with the instruments as well as "EFDeviceBatchCodeFirst" and "DeviceBatchGenerics" libraries to automatically generate reports of test data.
 
+Key Features:
+<ul>
+  <li>Can autonomously test up to 20 thin film LEDs in a row</li>
+  <li>OriginLab, OxyPlot, and .csv reports created after testing</li>
+  <li>Records images and electroluminescent spectra for every pixel tested</li>
+</ul>
+
 This project is designed to interact with:
 <ul>
 <li>a custom-built CNC system for loading and unloading test samples</li>
