@@ -30,3 +30,4 @@ Please note that this project is not intended for general usage, but for referen
 <li><a href="https://github.com/jakehyvonen/DeviceBatchGenerics">DeviceBatchGenerics</a></li>
 <li><a href="https://github.com/jakehyvonen/ExtendedTreeView">ExtendedTreeView</a></li>
 </ul>
+The script running on the Raspberry Pi can be found here: <a href="https://github.com/jakehyvonen/BTSPython">BTSPython</a>
